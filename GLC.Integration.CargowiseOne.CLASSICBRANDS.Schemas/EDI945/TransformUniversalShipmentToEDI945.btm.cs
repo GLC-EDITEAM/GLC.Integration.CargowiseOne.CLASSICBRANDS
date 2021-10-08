@@ -110,7 +110,7 @@ namespace GLC.Integration.CargowiseOne.CLASSICBRANDS.Schemas.EDI945 {
           <xsl:text>BM</xsl:text>
         </N901>
         <N902>
-           <xsl:value-of select=""s0:Shipment/s0:Order/s0:OrderNumber/text()""/>
+           <xsl:value-of select=""userCSharp:addzero(s0:Shipment/s0:Order/s0:ClientReference/text())""/>
       </N902>
         <xsl:for-each select=""//s0:CustomizedFieldCollection/s0:CustomizedField"">
           <xsl:if test=""s0:Key/text()='LoadType'"">
@@ -362,6 +362,13 @@ namespace GLC.Integration.CargowiseOne.CLASSICBRANDS.Schemas.EDI945 {
     
     public decimal value1=0.0M;
     
+    public string addzero(string po_num)
+    {
+    string strin = ""00000000000000000"";
+    string str_po_num = po_num+strin;
+    string str_out = str_po_num.Substring(0, 17);
+    return str_out;
+         }
      public double getcbconversion(int a)
     {
     double b=0;
